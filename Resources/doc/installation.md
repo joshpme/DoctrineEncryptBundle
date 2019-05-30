@@ -19,7 +19,7 @@ DoctrineEncryptBundle should be installed using [Composer](http://getcomposer.or
 ``` js
 {
     "require": {
-        "michaeldegroot/doctrine-encrypt-bundle": "3.0.*"
+        "joshpme/doctrine-encrypt-bundle": "4.0.*"
     }
 }
 ```
@@ -27,7 +27,7 @@ DoctrineEncryptBundle should be installed using [Composer](http://getcomposer.or
 Now tell composer to download the bundle by running the command:
 
 ``` bash
-$ php composer.phar update michaeldegroot/doctrine-encrypt-bundle
+$ composer update joshpme/doctrine-encrypt-bundle
 ```
 
 Composer will install the bundle to your project's `vendor/ambta` directory.
@@ -41,7 +41,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Ambta\DoctrineEncryptBundle\AmbtaDoctrineEncryptBundle(),
+        new DoctrineEncryptBundle\AmbtaDoctrineEncryptBundle(),
     );
 }
 ```
