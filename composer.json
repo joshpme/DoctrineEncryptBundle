@@ -5,16 +5,16 @@
   "license": "MIT",
   "description": "Encrypted symfony entity's by verified and standardized libraries",
   "require": {
-    "php": "^7.2",
-    "paragonie/halite": "^4.3",
-    "paragonie/sodium_compat": "^1.5",
-    "doctrine/orm": "^2.5",
-    "symfony/property-access": "^4.1",
-    "symfony/dependency-injection": "^4.1",
-    "symfony/yaml": "^4.1",
-    "symfony/http-kernel": "^4.1",
-    "symfony/config": "^4.1",
-    "symfony/stopwatch": "^2.2"
+    "php": ">=7.2",
+    "paragonie/halite": ">=4.3",
+    "paragonie/sodium_compat": ">=1.5",
+    "doctrine/orm": ">=2.5",
+    "symfony/property-access": ">=3.4",
+    "symfony/dependency-injection": ">=3.4",
+    "symfony/yaml": ">=3.4",
+    "symfony/http-kernel":">=3.4",
+    "symfony/config":">=3.4",
+    "symfony/stopwatch": ">=2.2"
   },
   "license": "MIT",
   "require-dev": {
