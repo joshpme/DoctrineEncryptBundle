@@ -13,7 +13,8 @@
     "symfony/dependency-injection": "^4.1",
     "symfony/yaml": "^4.1",
     "symfony/http-kernel": "^4.1",
-    "symfony/config": "^4.1"
+    "symfony/config": "^4.1",
+    "symfony/stopwatch": "^3.4"
   },
   "license": "MIT",
   "require-dev": {
@@ -24,7 +25,7 @@
     "defuse/php-encryption": "Alternative for halite for use with older php-versions"
   },
   "autoload": {
-    "psr-0": { "Ambta\\DoctrineEncryptBundle": "" }
+    "psr-0": { "DoctrineEncryptBundle": "" }
   },
   "target-dir": "Ambta/DoctrineEncryptBundle",
   "authors": [
