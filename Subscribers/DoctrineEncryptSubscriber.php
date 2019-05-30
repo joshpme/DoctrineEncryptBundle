@@ -2,6 +2,7 @@
 
 namespace Ambta\DoctrineEncryptBundle\Subscribers;
 
+use Doctrine\ORM\Mapping\Column;
 use ReflectionClass;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Events;
@@ -14,6 +15,7 @@ use Doctrine\Common\Util\ClassUtils;
 use Ambta\DoctrineEncryptBundle\Encryptors\EncryptorInterface;
 use ReflectionProperty;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
  * Doctrine event subscriber which encrypt/decrypt entities
@@ -65,17 +67,20 @@ class DoctrineEncryptSubscriber implements EventSubscriber
      */
     public $encryptCounter = 0;
 
+    private $stopWatch;
+
     /**
      * Initialization of subscriber
      *
      * @param Reader $annReader
      * @param EncryptorInterface|NULL $encryptor (Optional)  An EncryptorInterface.
      */
-    public function __construct(Reader $annReader, EncryptorInterface $encryptor)
+    public function __construct(Reader $annReader, EncryptorInterface $encryptor, Stopwatch $stopwatch)
     {
         $this->annReader = $annReader;
         $this->encryptor = $encryptor;
         $this->restoreEncryptor = $this->encryptor;
+        $this->stopWatch = $stopwatch;
     }
 
     /**
@@ -203,6 +208,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber
      */
     public function processFields($entity, $isEncryptOperation = true)
     {
+
         if (!empty($this->encryptor)) {
             // Check which operation to be used
             $encryptorMethod = $isEncryptOperation ? 'encrypt' : 'decrypt';
@@ -211,6 +217,8 @@ class DoctrineEncryptSubscriber implements EventSubscriber
 
             // Get ReflectionClass of our entity
             $properties = $this->getClassProperties($realClass);
+
+            $this->stopWatch->start($encryptorMethod);
 
             // Foreach property in the reflection class
             foreach ($properties as $refProperty) {
@@ -222,15 +230,34 @@ class DoctrineEncryptSubscriber implements EventSubscriber
                 /**
                  * If property is an normal value and contains the Encrypt tag, lets encrypt/decrypt that property
                  */
+
+
                 if ($this->annReader->getPropertyAnnotation($refProperty, self::ENCRYPTED_ANN_NAME)) {
                     $pac = PropertyAccess::createPropertyAccessor();
                     $value = $pac->getValue($entity, $refProperty->getName());
+
+                    /** @var Column $column */
+                    $column = $this->annReader->getPropertyAnnotation($refProperty, "Doctrine\ORM\Mapping\Column");
+
+
+                    if ("blob" == $column->type) {
+                        if (is_resource($value)) {
+                            $value = stream_get_contents($value);
+                        }
+                    }
+
                     if ($encryptorMethod == 'decrypt') {
+
                         if (!is_null($value) and !empty($value)) {
                             if (substr($value, -strlen(self::ENCRYPTION_MARKER)) == self::ENCRYPTION_MARKER) {
                                 $this->decryptCounter++;
                                 $currentPropValue = $this->encryptor->decrypt(substr($value, 0, -5));
+                                if ("blob" == $column->type) {
+                                    $currentPropValue = fopen("data://text/plain;base64," . base64_encode($currentPropValue),'r');
+                                }
                                 $pac->setValue($entity, $refProperty->getName(), $currentPropValue);
+                            } else {
+                                $pac->setValue($entity, $refProperty->getName(), $value);
                             }
                         }
                     } else {
@@ -244,6 +271,8 @@ class DoctrineEncryptSubscriber implements EventSubscriber
                     }
                 }
             }
+
+            $this->stopWatch->stop($encryptorMethod);
 
             return $entity;
         }
