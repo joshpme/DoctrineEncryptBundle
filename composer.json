@@ -14,7 +14,7 @@
     "symfony/yaml": "^4.1",
     "symfony/http-kernel": "^4.1",
     "symfony/config": "^4.1",
-    "symfony/stopwatch": "^3.4"
+    "symfony/stopwatch": "^2.2"
   },
   "license": "MIT",
   "require-dev": {
