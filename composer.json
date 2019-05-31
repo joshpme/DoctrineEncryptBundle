@@ -24,7 +24,7 @@
     "defuse/php-encryption": "Alternative for halite for use with older php-versions"
   },
   "autoload": {
-    "psr-4": { "DoctrineEncryptBundle": "" }
+    "psr-4": { "DoctrineEncryptBundle\\": "" }
   },
   "target-dir": "DoctrineEncryptBundle",
   "authors": [
