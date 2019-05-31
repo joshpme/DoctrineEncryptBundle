@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Decrypt whole database on tables which are encrypted
@@ -109,17 +110,17 @@ class DoctrineDecryptDatabaseCommand extends AbstractCommand
 
                 //Loop through the property's in the entity
                 foreach ($this->getEncryptionableProperties($metaData) as $property) {
-                    $methodeName = ucfirst($property->getName());
+                    $pac = PropertyAccess::createPropertyAccessor();
 
-                    $getter = 'get' . $methodeName;
-                    $setter = 'set' . $methodeName;
+                    $value = $pac->getValue($entity, $property->getName());
 
-                    //Check if getter and setter are set
-                    if ($entityReflectionClass->hasMethod($getter) && $entityReflectionClass->hasMethod($setter)) {
-                        $unencrypted = $entity->$getter();
-                        $entity->$setter($unencrypted);
-                        $valueCounter++;
+                    if (is_resource($value)) {
+                        $value = stream_get_contents($value);
                     }
+
+                    $pac->setValue($entity, $property->getName(),$value);
+
+                    $valueCounter++;
                 }
 
                 $this->subscriber->setEncryptor(null);

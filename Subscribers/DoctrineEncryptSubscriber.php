@@ -123,7 +123,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber
     public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        $this->processFields($entity, false);
+        $this->processFields($entity, false, false);
     }
 
     /**
@@ -135,7 +135,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber
     public function preUpdate(PreUpdateEventArgs $args)
     {
         $entity = $args->getEntity();
-        $this->processFields($entity);
+        $this->processFields($entity, true,true);
     }
 
     /**
@@ -147,7 +147,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber
     public function postLoad(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        $this->processFields($entity, false);
+        $this->processFields($entity, false, false);
     }
 
     /**
@@ -160,7 +160,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber
     {
         $unitOfWork = $preFlushEventArgs->getEntityManager()->getUnitOfWork();
         foreach ($unitOfWork->getScheduledEntityInsertions() as $entity) {
-            $this->processFields($entity);
+            $this->processFields($entity, true, true);
         }
     }
 
@@ -175,7 +175,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber
         $unitOfWork = $postFlushEventArgs->getEntityManager()->getUnitOfWork();
         foreach ($unitOfWork->getIdentityMap() as $entityMap) {
             foreach ($entityMap as $entity) {
-                $this->processFields($entity, false);
+                $this->processFields($entity, false, false);
             }
         }
     }
@@ -202,13 +202,11 @@ class DoctrineEncryptSubscriber implements EventSubscriber
      * @param Object $entity doctrine entity
      * @param Boolean $isEncryptOperation If true - encrypt, false - decrypt entity
      *
-     * @throws \RuntimeException
-     *
+     * @param bool $sendToDb
      * @return object|null
      */
-    public function processFields($entity, $isEncryptOperation = true)
+    public function processFields($entity, $isEncryptOperation = true, $sendToDb = false)
     {
-
         if (!empty($this->encryptor)) {
             // Check which operation to be used
             $encryptorMethod = $isEncryptOperation ? 'encrypt' : 'decrypt';
@@ -230,51 +228,44 @@ class DoctrineEncryptSubscriber implements EventSubscriber
                 /**
                  * If property is an normal value and contains the Encrypt tag, lets encrypt/decrypt that property
                  */
-
-
                 if ($this->annReader->getPropertyAnnotation($refProperty, self::ENCRYPTED_ANN_NAME)) {
                     $pac = PropertyAccess::createPropertyAccessor();
                     $value = $pac->getValue($entity, $refProperty->getName());
 
                     /** @var Column $column */
-                    $column = $this->annReader->getPropertyAnnotation($refProperty, "Doctrine\ORM\Mapping\Column");
+                    $column = $this->annReader->getPropertyAnnotation($refProperty, Column::class);
 
-
-                    if ("blob" == $column->type) {
-                        if (is_resource($value)) {
-                            $value = stream_get_contents($value);
-                        }
+                    if (is_resource($value)) {
+                        $value = stream_get_contents($value);
                     }
 
+                    $newValue = $value;
                     if ($encryptorMethod == 'decrypt') {
-
                         if (!is_null($value) and !empty($value)) {
                             if (substr($value, -strlen(self::ENCRYPTION_MARKER)) == self::ENCRYPTION_MARKER) {
                                 $this->decryptCounter++;
-                                $currentPropValue = $this->encryptor->decrypt(substr($value, 0, -5));
-                                if ("blob" == $column->type) {
-                                    $currentPropValue = fopen("data://text/plain;base64," . base64_encode($currentPropValue),'r');
-                                }
-                                $pac->setValue($entity, $refProperty->getName(), $currentPropValue);
-                            } else {
-                                $pac->setValue($entity, $refProperty->getName(), $value);
+                                $newValue = $this->encryptor->decrypt(substr($value, 0, -5));
                             }
                         }
                     } else {
                         if (!is_null($value) and !empty($value)) {
                             if (substr($value, -strlen(self::ENCRYPTION_MARKER)) != self::ENCRYPTION_MARKER) {
                                 $this->encryptCounter++;
-                                $currentPropValue = $this->encryptor->encrypt($value).self::ENCRYPTION_MARKER;
-                                $pac->setValue($entity, $refProperty->getName(), $currentPropValue);
+                                $newValue = $this->encryptor->encrypt($value).self::ENCRYPTION_MARKER;
                             }
                         }
+                    }
+
+                    if ("blob" == $column->type && !$sendToDb) {
+                        $stream = fopen("data://text/plain;base64," . base64_encode($newValue),'r');
+                        $pac->setValue($entity, $refProperty->getName(), $stream);
+                    } else {
+                        $pac->setValue($entity, $refProperty->getName(), $newValue);
                     }
                 }
             }
 
             $this->stopWatch->stop($encryptorMethod);
-
-            return $entity;
         }
 
         return $entity;

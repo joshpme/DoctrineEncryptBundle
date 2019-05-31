@@ -6,11 +6,8 @@
 
 ### Requirements
 
- - PHP >=7.0
- - Comes with package: [paragonie/sodium_compat](https://github.com/paragonie/sodium_compat) ^1.5
- - Comes with package: [Halite](https://github.com/paragonie/halite) ^3.0
- - [doctrine/orm](https://packagist.org/packages/doctrine/orm) >= 2.0
- - [symfony/framework-bundle](https://packagist.org/packages/symfony/framework-bundle) >= 2.0
+ - PHP >=7.2
+ - Choose between Halite and Defuse
 
 ### Step 1: Download DoctrineEncryptBundle using composer
 
