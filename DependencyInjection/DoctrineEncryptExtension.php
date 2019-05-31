@@ -17,8 +17,8 @@ use Symfony\Component\DependencyInjection\Loader;
 class DoctrineEncryptExtension extends Extension
 {
     const SupportedEncryptorClasses = array(
-        'Defuse' => \DoctrineEncryptBundle\Encryptors\DefuseEncryptor::class,
-        'Halite' => \DoctrineEncryptBundle\Encryptors\HaliteEncryptor::class,
+        'Defuse' => 'DoctrineEncryptBundle\Encryptors\DefuseEncryptor',
+        'Halite' => 'DoctrineEncryptBundle\Encryptors\HaliteEncryptor',
     );
 
     /**
