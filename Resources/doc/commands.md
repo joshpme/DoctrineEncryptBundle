@@ -22,7 +22,7 @@ DoctrineEncrypt\Entity\UserDetail has 13 properties which are encrypted.
 
 ## 2) Encrypt current database
 
-You can use the comment `doctrine:encrypt:database [encryptor]` to encrypt the current database.
+You can use the command `doctrine:encrypt:database` to encrypt existing data.
 
 ```
 $ php bin/console doctrine:encrypt:database
