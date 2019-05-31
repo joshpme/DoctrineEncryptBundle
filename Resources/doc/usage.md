@@ -19,23 +19,33 @@ class User {
     ..
 
     /**
-     * @ORM\Column(type="string", name="email")
      * @Encrypted
-     * @var int
+     * @ORM\Column(type="string")
      */
     private $email;
 
+    /**
+     * @Encrypted
+     * @ORM\Column(type="blob")
+     */
+    private $profile_picture;
     ..
 
 }
 ```
 
-It is as simple as that, the field will now be encrypted the first time the users entity gets edited.
-We keep an <ENC> prefix to check if data is encrypted or not so, unencrypted data will still work even if the field is encrypted.
+***Important***: If you have specified a length for a field, it is important to realise that the encrypted version of the string may be much longer. So you will need to allow for that.
+
+This version of the package also allows for the encryption of blobs. 
+
+You cannot encrypt other non-string / non-blob datatypes.
+
+Existing non-encrypted data will work, without any issues. You will need to run a command to encrypt existing data.
+
+Encrypting many fields may cause issues with performance.
 
 ## Console commands
 
-There are some console commands that can help you encrypt your existing database or change encryption methods.
-Read more about the database encryption commands provided with this bundle.
+Once you have chosen the fields to be encrypted. Run the command ```php bin/console doctrine:encrypt:datbase``` to encrypt any existing data.
 
 #### [Console commands](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/commands.md)
