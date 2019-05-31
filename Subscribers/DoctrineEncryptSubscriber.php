@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambta\DoctrineEncryptBundle\Subscribers;
+namespace DoctrineEncryptBundle\Subscribers;
 
 use Doctrine\ORM\Mapping\Column;
 use ReflectionClass;
@@ -12,7 +12,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Util\ClassUtils;
-use Ambta\DoctrineEncryptBundle\Encryptors\EncryptorInterface;
+use DoctrineEncryptBundle\Encryptors\EncryptorInterface;
 use ReflectionProperty;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -30,12 +30,12 @@ class DoctrineEncryptSubscriber implements EventSubscriber
     /**
      * Encryptor interface namespace
      */
-    const ENCRYPTOR_INTERFACE_NS = 'Ambta\DoctrineEncryptBundle\Encryptors\EncryptorInterface';
+    const ENCRYPTOR_INTERFACE_NS = 'DoctrineEncryptBundle\Encryptors\EncryptorInterface';
 
     /**
      * Encrypted annotation full name
      */
-    const ENCRYPTED_ANN_NAME = 'Ambta\DoctrineEncryptBundle\Configuration\Encrypted';
+    const ENCRYPTED_ANN_NAME = 'DoctrineEncryptBundle\Configuration\Encrypted';
 
     /**
      * Encryptor

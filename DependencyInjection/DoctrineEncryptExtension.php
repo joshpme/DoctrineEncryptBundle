@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambta\DoctrineEncryptBundle\DependencyInjection;
+namespace DoctrineEncryptBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -17,8 +17,8 @@ use Symfony\Component\DependencyInjection\Loader;
 class DoctrineEncryptExtension extends Extension
 {
     const SupportedEncryptorClasses = array(
-        'Defuse' => 'Ambta\DoctrineEncryptBundle\Encryptors\DefuseEncryptor',
-        'Halite' => 'Ambta\DoctrineEncryptBundle\Encryptors\HaliteEncryptor',
+        'Defuse' => \DoctrineEncryptBundle\Encryptors\DefuseEncryptor::class,
+        'Halite' => \DoctrineEncryptBundle\Encryptors\HaliteEncryptor::class,
     );
 
     /**
@@ -38,8 +38,8 @@ class DoctrineEncryptExtension extends Extension
         }
 
         // Set parameters
-        $container->setParameter('ambta_doctrine_encrypt.encryptor_class_name', $config['encryptor_class_full']);
-        $container->setParameter('ambta_doctrine_encrypt.secret_key_path',$config['secret_directory_path'].'/.'.$config['encryptor_class'].'.key');
+        $container->setParameter('doctrine_encrypt.encryptor_class_name', $config['encryptor_class_full']);
+        $container->setParameter('doctrine_encrypt.secret_key_path',$config['secret_directory_path'].'/.'.$config['encryptor_class'].'.key');
 
         // Load service file
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
@@ -53,6 +53,6 @@ class DoctrineEncryptExtension extends Extension
      */
     public function getAlias()
     {
-        return 'ambta_doctrine_encrypt';
+        return 'doctrine_encrypt';
     }
 }

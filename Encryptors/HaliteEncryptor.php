@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambta\DoctrineEncryptBundle\Encryptors;
+namespace DoctrineEncryptBundle\Encryptors;
 
 use \ParagonIE\Halite\HiddenString;
 use \ParagonIE\Halite\KeyFactory;

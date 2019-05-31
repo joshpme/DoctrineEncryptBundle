@@ -1,8 +1,8 @@
 <?php
 
-namespace Ambta\DoctrineEncryptBundle\Tests\Unit\DependencyInjection;
+namespace DoctrineEncryptBundle\Tests\Unit\DependencyInjection;
 
-use Ambta\DoctrineEncryptBundle\Encryptors\DefuseEncryptor;
+use DoctrineEncryptBundle\Encryptors\DefuseEncryptor;
 use PHPUnit\Framework\TestCase;
 
 class DefuseEncryptorTest extends TestCase

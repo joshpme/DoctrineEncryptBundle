@@ -6,8 +6,6 @@
   "description": "Encrypted symfony entity's by verified and standardized libraries",
   "require": {
     "php": ">=7.2",
-    "paragonie/halite": ">=4.3",
-    "paragonie/sodium_compat": ">=1.5",
     "doctrine/orm": ">=2.5",
     "symfony/property-access": ">=3.4",
     "symfony/dependency-injection": ">=3.4",
@@ -16,22 +14,23 @@
     "symfony/config":">=3.4",
     "symfony/stopwatch": ">=2.2"
   },
-  "license": "MIT",
   "require-dev": {
     "phpunit/phpunit": "^6.5",
     "defuse/php-encryption": "^2.1"
   },
   "suggest": {
+    "paragonie/halite": ">=4.3",
+    "paragonie/sodium_compat": ">=1.5",
     "defuse/php-encryption": "Alternative for halite for use with older php-versions"
   },
   "autoload": {
-    "psr-0": { "DoctrineEncryptBundle": "" }
+    "psr-4": { "DoctrineEncryptBundle": "" }
   },
-  "target-dir": "Ambta/DoctrineEncryptBundle",
+  "target-dir": "DoctrineEncryptBundle",
   "authors": [
     {
-      "name": "GiveMeAllYourCats",
-      "email": "specamps@gmail.com"
+      "name": "Josh P",
+      "email": "packagist@joshp.me"
     }
   ]
 }

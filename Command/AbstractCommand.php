@@ -1,7 +1,7 @@
 <?php
-namespace Ambta\DoctrineEncryptBundle\Command;
+namespace DoctrineEncryptBundle\Command;
 
-use Ambta\DoctrineEncryptBundle\Subscribers\DoctrineEncryptSubscriber;
+use DoctrineEncryptBundle\Subscribers\DoctrineEncryptSubscriber;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -117,7 +117,7 @@ abstract class AbstractCommand extends Command
         $properties    = [];
 
         foreach ($propertyArray as $property) {
-            if ($this->annotationReader->getPropertyAnnotation($property, 'Ambta\DoctrineEncryptBundle\Configuration\Encrypted')) {
+            if ($this->annotationReader->getPropertyAnnotation($property, 'DoctrineEncryptBundle\Configuration\Encrypted')) {
                 $properties[] = $property;
             }
         }

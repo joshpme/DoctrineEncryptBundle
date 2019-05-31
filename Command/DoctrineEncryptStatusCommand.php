@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambta\DoctrineEncryptBundle\Command;
+namespace DoctrineEncryptBundle\Command;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Symfony\Component\Console\Input\InputInterface;

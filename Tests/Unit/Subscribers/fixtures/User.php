@@ -1,8 +1,8 @@
 <?php
 
-namespace Ambta\DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures;
+namespace DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures;
 
-use Ambta\DoctrineEncryptBundle\Configuration\Encrypted;
+use DoctrineEncryptBundle\Configuration\Encrypted;
 
 class User
 {

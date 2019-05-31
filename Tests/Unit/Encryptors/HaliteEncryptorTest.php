@@ -1,8 +1,8 @@
 <?php
 
-namespace Ambta\DoctrineEncryptBundle\Tests\Unit\DependencyInjection;
+namespace DoctrineEncryptBundle\Tests\Unit\DependencyInjection;
 
-use Ambta\DoctrineEncryptBundle\Encryptors\HaliteEncryptor;
+use DoctrineEncryptBundle\Encryptors\HaliteEncryptor;
 use PHPUnit\Framework\TestCase;
 
 class HaliteEncryptorTest extends TestCase

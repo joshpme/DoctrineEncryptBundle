@@ -30,7 +30,7 @@ Now tell composer to download the bundle by running the command:
 $ composer update joshpme/doctrine-encrypt-bundle
 ```
 
-Composer will install the bundle to your project's `vendor/ambta` directory.
+Composer will install the bundle to your project's `vendor/joshpme` directory.
 
 ### Step 2: Enable the bundle
 
@@ -41,7 +41,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new DoctrineEncryptBundle\AmbtaDoctrineEncryptBundle(),
+        new DoctrineEncryptBundle\DoctrineEncryptBundle(),
     );
 }
 ```

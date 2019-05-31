@@ -1,13 +1,13 @@
 <?php
 
-namespace Ambta\DoctrineEncryptBundle\Tests\Unit\Subscribers;
+namespace DoctrineEncryptBundle\Tests\Unit\Subscribers;
 
-use Ambta\DoctrineEncryptBundle\Configuration\Encrypted;
-use Ambta\DoctrineEncryptBundle\Encryptors\EncryptorInterface;
-use Ambta\DoctrineEncryptBundle\Subscribers\DoctrineEncryptSubscriber;
-use Ambta\DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures\ExtendedUser;
-use Ambta\DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures\User;
-use Ambta\DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures\WithUser;
+use DoctrineEncryptBundle\Configuration\Encrypted;
+use DoctrineEncryptBundle\Encryptors\EncryptorInterface;
+use DoctrineEncryptBundle\Subscribers\DoctrineEncryptSubscriber;
+use DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures\ExtendedUser;
+use DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures\User;
+use DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures\WithUser;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;

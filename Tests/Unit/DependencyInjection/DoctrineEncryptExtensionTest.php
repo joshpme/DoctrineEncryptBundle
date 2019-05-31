@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambta\DoctrineEncryptBundle\Tests\Unit\DependencyInjection;
+namespace DoctrineEncryptBundle\Tests\Unit\DependencyInjection;
 
-use Ambta\DoctrineEncryptBundle\DependencyInjection\DoctrineEncryptExtension;
-use Ambta\DoctrineEncryptBundle\Encryptors\DefuseEncryptor;
-use Ambta\DoctrineEncryptBundle\Encryptors\HaliteEncryptor;
+use DoctrineEncryptBundle\DependencyInjection\DoctrineEncryptExtension;
+use DoctrineEncryptBundle\Encryptors\DefuseEncryptor;
+use DoctrineEncryptBundle\Encryptors\HaliteEncryptor;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -26,7 +26,7 @@ class DoctrineEncryptExtensionTest extends TestCase
         $container = $this->createContainer();
         $this->extension->load([[]], $container);
 
-        $this->assertSame(HaliteEncryptor::class, $container->getParameter('ambta_doctrine_encrypt.encryptor_class_name'));
+        $this->assertSame(HaliteEncryptor::class, $container->getParameter('doctrine_encrypt.encryptor_class_name'));
     }
 
     public function testConfigLoadDefuse()
@@ -38,7 +38,7 @@ class DoctrineEncryptExtensionTest extends TestCase
         ];
         $this->extension->load([$config], $container);
 
-        $this->assertSame(DefuseEncryptor::class, $container->getParameter('ambta_doctrine_encrypt.encryptor_class_name'));
+        $this->assertSame(DefuseEncryptor::class, $container->getParameter('doctrine_encrypt.encryptor_class_name'));
     }
 
     public function testConfigLoadCustom()
@@ -51,7 +51,7 @@ class DoctrineEncryptExtensionTest extends TestCase
 
         $this->markTestSkipped();
 
-        $this->assertSame(self::class, $container->getParameter('ambta_doctrine_encrypt.encryptor_class_name'));
+        $this->assertSame(self::class, $container->getParameter('doctrine_encrypt.encryptor_class_name'));
     }
 
     private function createContainer()

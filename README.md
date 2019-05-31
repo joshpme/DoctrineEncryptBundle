@@ -20,7 +20,7 @@ This bundle has updated security by not rolling it's own encryption and using ve
 
 ```yml
 // Config.yml
-ambta_doctrine_encrypt:
+doctrine_encrypt:
     encryptor_class: Halite
 ```
 
@@ -32,7 +32,7 @@ ambta_doctrine_encrypt:
 
 ```yml
 // Config.yml
-ambta_doctrine_encrypt:
+doctrine_encrypt:
     encryptor_class: Defuse
 ```
 
@@ -46,7 +46,7 @@ Secret key is generated if there is no key found. This is automatically generate
 
 ```yml
 // Config.yml
-ambta_doctrine_encrypt:
+doctrine_encrypt:
     secret_directory_path: '%kernel.project_dir%'   # Default value
 ```
 

@@ -6,7 +6,7 @@ namespace Acme\DemoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 // importing @Encrypted annotation
-use Ambta\DoctrineEncryptBundle\Configuration\Encrypted;
+use DoctrineEncryptBundle\Configuration\Encrypted;
 
 /**
  * @ORM\Entity
@@ -97,7 +97,7 @@ use Acme\DemoBundle\Entity\UserV;
 class DemoController extends Controller
 {
     /**
-     * @Route("/show-user/{id}", name="_ambta_decrypt_test", requirements={"id" = "\d+"})
+     * @Route("/show-user/{id}", name="_decrypt_test", requirements={"id" = "\d+"})
      * @Template
      */
     public function getUserAction(UserV $user) {}
