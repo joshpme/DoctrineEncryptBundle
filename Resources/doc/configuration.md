@@ -1,7 +1,7 @@
 # Configuration Reference
 
 * **encryptor_class** - Custom class for encrypting data
-    * Encryptor class, [your own encryptor class](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/custom_encryptor.md) will override encryptor paramater
+    * Encryptor class, [your own encryptor class](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/custom_encryptor.md) will override encryptor paramater
     * Default: Halite
 
 * **secret_directory_path** - The path the encryption key will be generated in.
@@ -22,4 +22,4 @@ If you want to use Defuse, make sure to require it!
 ## Usage
 
 Read how to use the database encryption bundle in your project.
-#### [Usage](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/usage.md)
+#### [Usage](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/usage.md)

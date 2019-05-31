@@ -48,4 +48,4 @@ public function registerBundles()
 All configuration value's are optional.
 On the following page you can find the configuration information.
 
-#### [Configuration](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/configuration.md)
+#### [Configuration](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/configuration.md)

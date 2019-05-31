@@ -1,18 +1,16 @@
 # Example Of Usage
 
 ```php
-namespace Acme\DemoBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-// importing @Encrypted annotation
 use DoctrineEncryptBundle\Configuration\Encrypted;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user_v")
+ * @ORM\Table()
  */
-class UserV {
+class Person {
 
     /**
      * @ORM\Id
@@ -23,33 +21,18 @@ class UserV {
     private $id;
 
     /**
-     * @ORM\Column(type="text", name="total_money")
      * @Encrypted
-     * @var int
-     */
-    private $totalMoney;
-
-    /**
-     * @ORM\Column(type="string", length=100, name="first_name")
+     * @ORM\Column(type="string", length=500)
      * @var string
      */
-    private $firstName;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=100, name="last_name")
-     * @var string
-     */
-    private $lastName;
-
-    /**
-     * @ORM\Column(type="text", name="credit_card_number")
      * @Encrypted
+     * @ORM\Column(type="blob")
      * @var string
      */
-    private $creditCardNumber;
-
-    //common getters/setters here...
-
+    private $photo;
 }
 ```
 
@@ -61,14 +44,14 @@ namespace Acme\DemoBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Acme\DemoBundle\Entity\UserV;
+use AppBundle\Entity\Profile;
 
 class LoadUserData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
         $user = new UserV();
-        $user->setFirstName('Victor');
+        $user->setContent(file_get_contents($file->getPathname()))
         $user->setLastName('Melnik');
         $user->setTotalMoney(20);
         $user->setCreditCardNumber('1234567890');
@@ -137,4 +120,4 @@ So our information is encrypted, and unless someone has your .DefuseEncryptor.ke
 
 You need `DoctrineFixturesBundle` and `defuse/php-encryption` extension for this example
 
-#### [Back to index](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/index.md)
+#### [Back to index](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/index.md)

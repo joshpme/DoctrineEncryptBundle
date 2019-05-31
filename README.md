@@ -32,8 +32,6 @@ doctrine_encrypt:
 
 ### Secret key
 
-The secret key should be a max 32 byte hexadecimal string (`[0-9a-fA-F]`).
-
 Secret key is generated if there is no key found. This is automatically generated and stored in the folder defined in the configuration
 
 ```yml
@@ -43,6 +41,8 @@ doctrine_encrypt:
 ```
 
 Filename example: `.DefuseEncryptor.key` or `.HaliteEncryptor.key`
+
+If you lose this key, you've lost access to the data. So you may want to back it up securely. 
 
 **Do not forget to add these files to your .gitignore file, you do not want this on your repository!**
 

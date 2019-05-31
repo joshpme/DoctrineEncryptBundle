@@ -5,8 +5,8 @@ All encryption/decryption work on the server side.
 
 The following documents are available:
 
-* [Installation](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/installation.md)
-* [Configuration](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/configuration.md)
-* [Usage](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/usage.md)
-* [Console commands](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/commands.md)
-* [Custom encryptor class](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/custom_encryptor.md)
+* [Installation](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/installation.md)
+* [Configuration](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/configuration.md)
+* [Usage](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/usage.md)
+* [Console commands](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/commands.md)
+* [Custom encryptor class](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/custom_encryptor.md)

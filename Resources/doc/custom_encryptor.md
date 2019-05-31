@@ -4,4 +4,4 @@ We can imagine that you want to use your own encryption class, and while that se
 
 That being said, you can add custom Encryptor classes to /DoctrineEncryptBundle/Encryptors to implement your own favorite library.
 
-#### [Back to index](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/index.md)
+#### [Back to index](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/index.md)

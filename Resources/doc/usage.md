@@ -34,7 +34,11 @@ class User {
 }
 ```
 
-***Important***: If you have specified a length for a field, it is important to realise that the encrypted version of the string may be much longer. So you will need to allow for that.
+***Important***: If you have specified a length for a field, it is important to realise that the encrypted version of the string will be a longer than the original input. So you will need to allow for that.
+
+Calculating the size requirement is pretty complicated, I suggest allowing a minimum of 1000 characters for a 250 or less character string.
+
+
 
 This version of the package also allows for the encryption of blobs. 
 
@@ -46,6 +50,6 @@ Encrypting many fields may cause issues with performance.
 
 ## Console commands
 
-Once you have chosen the fields to be encrypted. Run the command ```php bin/console doctrine:encrypt:datbase``` to encrypt any existing data.
+Once you have chosen the fields to be encrypted. Run the command ```php bin/console doctrine:encrypt:database``` to encrypt any existing data.
 
-#### [Console commands](https://github.com/michaeldegroot/DoctrineEncryptBundle/blob/master/Resources/doc/commands.md)
+#### [Console commands](https://github.com/joshpme/DoctrineEncryptBundle/blob/master/Resources/doc/commands.md)
