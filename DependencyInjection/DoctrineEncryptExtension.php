@@ -2,6 +2,8 @@
 
 namespace DoctrineEncryptBundle\DependencyInjection;
 
+use DoctrineEncryptBundle\Encryptors\DefuseEncryptor;
+use DoctrineEncryptBundle\Encryptors\HaliteEncryptor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -17,8 +19,8 @@ use Symfony\Component\DependencyInjection\Loader;
 class DoctrineEncryptExtension extends Extension
 {
     const SupportedEncryptorClasses = array(
-        'Defuse' => 'DoctrineEncryptBundle\Encryptors\DefuseEncryptor',
-        'Halite' => 'DoctrineEncryptBundle\Encryptors\HaliteEncryptor',
+        'Defuse' => DefuseEncryptor::class,
+        'Halite' => HaliteEncryptor::class,
     );
 
     /**

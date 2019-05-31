@@ -19,7 +19,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@annotation_reader"
-            - "doctrine_encrypt.subscriber"
+            - "@doctrine_encrypt.subscriber"
 
     doctrine_encrypt.command.encrypt.database:
         class: DoctrineEncryptBundle\Command\DoctrineEncryptDatabaseCommand
