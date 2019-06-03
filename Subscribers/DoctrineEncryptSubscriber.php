@@ -232,8 +232,6 @@ class DoctrineEncryptSubscriber implements EventSubscriber
                     $pac = PropertyAccess::createPropertyAccessor();
                     $value = $pac->getValue($entity, $refProperty->getName());
 
-                    /** @var Column $column */
-                    $column = $this->annReader->getPropertyAnnotation($refProperty, Column::class);
 
                     if (is_resource($value)) {
                         $value = stream_get_contents($value);
@@ -256,7 +254,10 @@ class DoctrineEncryptSubscriber implements EventSubscriber
                         }
                     }
 
-                    if ("blob" == $column->type && !$sendToDb) {
+                    /** @var Column $column */
+                    $column = $this->annReader->getPropertyAnnotation($refProperty, Column::class);
+
+                    if ($column !== false && "blob" == $column->type && !$sendToDb) {
                         $stream = fopen("data://text/plain;base64," . base64_encode($newValue),'r');
                         $pac->setValue($entity, $refProperty->getName(), $stream);
                     } else {
@@ -271,7 +272,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber
         return $entity;
     }
 
-    private function handleEmbeddedAnnotation($entity, ReflectionProperty $embeddedProperty, bool $isEncryptOperation = true)
+    private function handleEmbeddedAnnotation($entity, ReflectionProperty $embeddedProperty, $isEncryptOperation = true)
     {
         $propName = $embeddedProperty->getName();
 

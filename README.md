@@ -53,4 +53,3 @@ If you lose this key, you've lost access to the data. So you may want to back it
 * [Configuration](Resources/doc/configuration.md)
 * [Usage](Resources/doc/usage.md)
 * [Console commands](Resources/doc/commands.md)
-* [Custom encryption class](Resources/doc/custom_encryptor.md)

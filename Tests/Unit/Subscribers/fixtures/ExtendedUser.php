@@ -12,7 +12,7 @@ class ExtendedUser extends User
      */
     public $extra;
 
-    public function __construct(string $name, ?string $address, ?string $extra)
+    public function __construct($name, $address = null, $extra = null)
     {
         parent::__construct($name, $address);
         $this->extra = $extra;

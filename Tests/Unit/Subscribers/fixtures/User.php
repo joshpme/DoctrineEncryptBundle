@@ -18,7 +18,7 @@ class User
      */
     private $address;
 
-    public function __construct(string $name, ?string $address)
+    public function __construct($name = null, $address = null)
     {
         $this->name = $name;
         $this->address = $address;
@@ -32,5 +32,21 @@ class User
     public function setAddress(?string $address): void
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param mixed $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
     }
 }

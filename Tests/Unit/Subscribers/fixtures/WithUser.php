@@ -24,7 +24,7 @@ class WithUser
      */
     public $user;
 
-    public function __construct(string $name, string $foo, User $user)
+    public function __construct($name, $foo, User $user)
     {
         $this->name = $name;
         $this->foo = $foo;

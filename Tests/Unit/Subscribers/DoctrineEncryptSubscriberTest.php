@@ -8,9 +8,7 @@ use DoctrineEncryptBundle\Subscribers\DoctrineEncryptSubscriber;
 use DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures\ExtendedUser;
 use DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures\User;
 use DoctrineEncryptBundle\Tests\Unit\Subscribers\fixtures\WithUser;
-use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Event\PreFlushEventArgs;
@@ -18,6 +16,7 @@ use Doctrine\ORM\Mapping\Embedded;
 use Doctrine\ORM\UnitOfWork;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class DoctrineEncryptSubscriberTest extends TestCase
 {
@@ -35,6 +34,11 @@ class DoctrineEncryptSubscriberTest extends TestCase
      * @var Reader|MockObject
      */
     private $reader;
+
+    /**
+     * @var Stopwatch|MockObject
+     */
+    private $stopWatch;
 
     protected function setUp()
     {
@@ -54,12 +58,13 @@ class DoctrineEncryptSubscriberTest extends TestCase
             })
         ;
 
+
         $this->reader = $this->createMock(Reader::class);
         $this->reader->expects($this->any())
             ->method('getPropertyAnnotation')
             ->willReturnCallback(function (\ReflectionProperty $reflProperty, string $class) {
                 if (Encrypted::class === $class) {
-                    return \in_array($reflProperty->getName(), ['name', 'address', 'extra']);
+                    return \in_array($reflProperty->getName(), ['name', 'address', 'extra', 'picture']);
                 }
                 if (Embedded::class === $class) {
                     return 'user' === $reflProperty->getName();
@@ -69,7 +74,9 @@ class DoctrineEncryptSubscriberTest extends TestCase
             })
         ;
 
-        $this->subscriber = new DoctrineEncryptSubscriber($this->reader, $this->encryptor);
+        $this->stopWatch = $this->createMock(Stopwatch::class);
+
+        $this->subscriber = new DoctrineEncryptSubscriber($this->reader, $this->encryptor, $this->stopWatch);
     }
 
     public function testSetRestorEncryptor()
