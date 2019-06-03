@@ -31,7 +31,7 @@ Composer will install the bundle to your project's `vendor/joshpme` directory.
 
 ### Step 2: Enable the bundle
 
-Enable the bundle in the Symfony2 kernel by adding it in your /app/AppKernel.php file:
+Enable the bundle in the Symfony, add it in your app/AppKernel.php file:
 
 ``` php
 public function registerBundles()
